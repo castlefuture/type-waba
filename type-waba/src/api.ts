@@ -8,4 +8,4 @@ export const getSearchs = () =>
   instance.get("winesearch/?search=몬테스").then((response) => response.data);
 
 export const postDetail = () =>
-  instance.post(`winesearch/detail/11`).then((response) => response.data);
+  instance.post("winesearch/detail/11").then((response) => response.data);

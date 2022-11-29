@@ -9,6 +9,7 @@ import Cellar from "./routes/Cellar";
 import Find from "./routes/Find";
 import SearchDetail from "./routes/SearchDetail";
 import Login from "./routes/LoginPage";
+import Test from "./routes/Test";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "find",
         element: <Find />,
+      },
+      {
+        path: "test",
+        element: <Test />,
       },
     ],
   },

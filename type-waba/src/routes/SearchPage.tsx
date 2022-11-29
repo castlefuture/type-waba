@@ -12,6 +12,7 @@ interface ISearch {
 
 export default function SearchPage() {
   const { isLoading, data } = useQuery<ISearch[]>(["searchs"], getSearchs);
+  console.log(data);
   const [inputValue, setInputValue] = useState("");
   return (
     <Box bg={"#333333"} minH={"1920px"}>

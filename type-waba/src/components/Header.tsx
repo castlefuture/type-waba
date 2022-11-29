@@ -9,13 +9,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import {
-  FaWineBottle,
-  FaMoon,
-  FaSun,
-  FaUserNinja,
-  FaLock,
-} from "react-icons/fa";
+import { FaWineBottle, FaMoon, FaSun } from "react-icons/fa";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 
@@ -38,12 +32,10 @@ export default function Header() {
       bg={"#333333"}
       justifyContent={"space-between"}
       alignItems="center"
-      py={5}
-      px={40}
-      direction={{
-        sm: "column",
-        md: "row",
-      }}
+      width={"390px"}
+      py={"30px"}
+      px={"16px"}
+      direction={"row"}
       spacing={{
         sm: 4,
         md: 0,

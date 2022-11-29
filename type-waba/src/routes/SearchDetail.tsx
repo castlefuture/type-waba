@@ -1,25 +1,41 @@
-import {
-  Box,
-  Button,
-  Grid,
-  HStack,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Skeleton,
-  SkeletonText,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Grid, Image, Text, VStack } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { postDetail } from "../api";
 
+interface IDetail {
+  wine_id: number;
+  wine_picture: string;
+  kname: string;
+  ename: string;
+  winetype: string;
+  kr_country: string;
+  kr_region: string;
+  kr_grape_list: [];
+  sweet: number;
+  acidic: number;
+  body: number;
+  tannic: number;
+  food_list: [];
+}
+
+interface IInfo {
+  wine_detail: IDetail[];
+}
+
 export default function SearchDetail() {
   const { winePk } = useParams();
-  const { isLoading, data } = useQuery([`wine:${winePk}`], postDetail);
-  console.log(data);
+  const { isLoading, data } = useQuery<IInfo[]>([`wine:${winePk}`], postDetail);
+  console.log("data", data);
+  // const getWine = () => {
+  //   axios
+  //     .post(`http://3.38.2.131:8000/api/v1/winesearch/detail/11`)
+  //     .then((response) => {
+  //       // Handle success.
+  //       console.log("Well done!");
+  //     });
+  // };
+
   return (
     <Box bg={"#333333"} minH={"1920px"}>
       <Box px={5}>
@@ -27,6 +43,7 @@ export default function SearchDetail() {
           <h1>와인 검색</h1>
         </Box>
         <VStack alignItems="flex-start">
+          {/* <Button onClick={getWine}>검색</Button> */}
           <Grid gap={2} templateColumns={"2fr 3fr"}>
             <Box position="relative" overflow={"hidden"} mb={2} rounded="3xl">
               <Image
