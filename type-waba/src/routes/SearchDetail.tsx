@@ -12,8 +12,14 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import { postDetail } from "../api";
 
-export default function Result() {
+export default function SearchDetail() {
+  const { winePk } = useParams();
+  const { isLoading, data } = useQuery([`wine:${winePk}`], postDetail);
+  console.log(data);
   return (
     <Box bg={"#333333"} minH={"1920px"}>
       <Box px={5}>

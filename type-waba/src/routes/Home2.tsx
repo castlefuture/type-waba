@@ -4,8 +4,6 @@ import {
   Grid,
   HStack,
   Image,
-  Skeleton,
-  SkeletonText,
   Text,
   VStack,
 } from "@chakra-ui/react";

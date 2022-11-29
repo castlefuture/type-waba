@@ -5,9 +5,10 @@ import Home from "./routes/Home";
 import Home2 from "./routes/Home2";
 import SearchPage from "./routes/SearchPage";
 import NotFound from "./routes/NotFound";
-import Result from "./routes/Result";
 import Cellar from "./routes/Cellar";
 import Find from "./routes/Find";
+import SearchDetail from "./routes/SearchDetail";
+import Login from "./routes/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "login",
+        element: <Login />,
+      },
+      {
         path: "home2",
         element: <Home2 />,
       },
@@ -28,8 +33,8 @@ const router = createBrowserRouter([
         element: <SearchPage />,
       },
       {
-        path: "result",
-        element: <Result />,
+        path: "wines/:searchPk",
+        element: <SearchDetail />,
       },
       {
         path: "cellar",

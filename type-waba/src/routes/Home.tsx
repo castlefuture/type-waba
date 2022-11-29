@@ -1,8 +1,21 @@
 import { Box, Grid, Skeleton, SkeletonText } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 import Room from "../components/Room";
+import RoomSkeleton from "../components/RoomSkeleton";
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [rooms, setRooms] = useState([]);
+  const fetchRooms = async () => {
+    const response = await fetch("http://127.0.0.1:8000/api/v1/rooms/");
+    const json = await response.json();
+    setRooms(json);
+    setIsLoading(false);
+  };
+  useEffect(() => {
+    fetchRooms();
+  }, []);
   return (
     <Grid
       mt={10}
@@ -19,11 +32,20 @@ export default function Home() {
         xl: "repeat(4, 1fr)",
         "2xl": "repeat(5, 1fr)",
       }}>
-      <Room />
-      <Box>
-        <Skeleton mb={6} rounded="2xl" height={280} />
-        <SkeletonText w="50%" noOfLines={3} />
-      </Box>
+      {isLoading ? (
+        <>
+          <RoomSkeleton />
+          <RoomSkeleton />
+          <RoomSkeleton />
+          <RoomSkeleton />
+          <RoomSkeleton />
+          <RoomSkeleton />
+          <RoomSkeleton />
+        </>
+      ) : null}
+      {rooms.map((room) => (
+        <Room />
+      ))}
     </Grid>
   );
 }
