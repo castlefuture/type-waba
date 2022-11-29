@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Input, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Input, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -6,20 +6,25 @@ import axios from "axios";
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [birthdate, setBirthdate] = useState("");
+  const [region, setRegion] = useState("");
+  const [gender, setGender] = useState("");
   const navigate = useNavigate();
 
-  const checkUser = () => {
+  const register = () => {
     axios
-      .post("http://3.38.2.131:8000/api/v1/users/auth/", {
-        //보내고자 하는 데이터
+      .post("http://3.38.2.131:8000/api/v1/users/register/", {
         email: email,
         password: password,
+        username: username,
+        birthdate: birthdate,
+        region: region,
+        gender: gender,
       })
       .then((response) => {
         // Handle success.
         console.log("Well done!");
-        // console.log("User token", response.data.jwt);
-        // localStorage.setItem("token", response.data.jwt);
         console.log("User token", response.data.token.access);
         localStorage.setItem("token", response.data.token.access);
         navigate("/");
@@ -62,13 +67,13 @@ export default function Signup() {
             border={"1px"}
             borderColor={"#FAF4E1"}
             color={"#FAF4E1"}
-            value={email}
+            value={password}
             rounded="none"
             variant={"filled"}
             placeholder="비밀번호"
             _placeholder={{ color: "#FAF4E1" }}
             onChange={(event) => {
-              setEmail(event.target.value);
+              setPassword(event.target.value);
             }}
           />
 
@@ -80,13 +85,13 @@ export default function Signup() {
             border={"1px"}
             borderColor={"#FAF4E1"}
             color={"#FAF4E1"}
-            value={email}
+            value={username}
             rounded="none"
             variant={"filled"}
             placeholder="닉네임"
             _placeholder={{ color: "#FAF4E1" }}
             onChange={(event) => {
-              setEmail(event.target.value);
+              setUsername(event.target.value);
             }}
           />
           <Input
@@ -97,13 +102,13 @@ export default function Signup() {
             border={"1px"}
             borderColor={"#FAF4E1"}
             color={"#FAF4E1"}
-            value={email}
+            value={birthdate}
             rounded="none"
             variant={"filled"}
-            placeholder="생년월일"
+            placeholder="생년월일(YYYY-MM-DD)"
             _placeholder={{ color: "#FAF4E1" }}
             onChange={(event) => {
-              setEmail(event.target.value);
+              setBirthdate(event.target.value);
             }}
           />
           <Input
@@ -114,13 +119,13 @@ export default function Signup() {
             border={"1px"}
             borderColor={"#FAF4E1"}
             color={"#FAF4E1"}
-            value={email}
+            value={region}
             rounded="none"
             variant={"filled"}
             placeholder="지역"
             _placeholder={{ color: "#FAF4E1" }}
             onChange={(event) => {
-              setEmail(event.target.value);
+              setRegion(event.target.value);
             }}
           />
           <Input
@@ -131,13 +136,13 @@ export default function Signup() {
             border={"1px"}
             borderColor={"#FAF4E1"}
             color={"#FAF4E1"}
-            value={email}
+            value={gender}
             rounded="none"
             variant={"filled"}
             placeholder="성별"
             _placeholder={{ color: "#FAF4E1" }}
             onChange={(event) => {
-              setEmail(event.target.value);
+              setGender(event.target.value);
             }}
           />
         </VStack>
@@ -146,7 +151,7 @@ export default function Signup() {
           height={"48px"}
           fontSize={"20px"}
           onClick={() => {
-            checkUser();
+            register();
           }}
           bg={"#2C4934"}
           color={"#FAF4E1"}
