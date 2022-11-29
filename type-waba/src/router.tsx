@@ -10,6 +10,7 @@ import Find from "./routes/Find";
 import SearchDetail from "./routes/SearchDetail";
 import Login from "./routes/LoginPage";
 import Test from "./routes/Test";
+import Signup from "./routes/SignupPage";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
       },
       {
         path: "home2",

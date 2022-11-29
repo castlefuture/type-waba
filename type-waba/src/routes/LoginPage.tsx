@@ -2,6 +2,7 @@ import { Box, Button, Flex, Input, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -39,24 +40,30 @@ export default function Login() {
             height={"45px"}
             fontSize={"16px"}
             bg={"#FAF4E1"}
+            color={"#333333"}
             value={email}
+            rounded="none"
+            variant={"filled"}
+            placeholder="이메일"
+            _placeholder={{ color: "#333333" }}
             onChange={(event) => {
               setEmail(event.target.value);
             }}
-            variant={"filled"}
-            placeholder="이메일"
           />
           <Input
             mt={"8px"}
             height={"45px"}
             fontSize={"16px"}
             bg={"#FAF4E1"}
+            color={"#333333"}
             value={password}
+            rounded="none"
+            variant={"filled"}
+            placeholder="비밀번호"
+            _placeholder={{ color: "#333333" }}
             onChange={(event) => {
               setPassword(event.target.value);
             }}
-            variant={"filled"}
-            placeholder="비밀번호"
           />
         </VStack>
         <Button
@@ -71,14 +78,17 @@ export default function Login() {
           w="100%">
           로그인
         </Button>
-        <Button
-          width={"206px"}
-          fontSize={"12px"}
-          color={"#FAF4E1"}
-          fontWeight={"thin"}
-          variant="link">
-          회원가입
-        </Button>
+
+        <Link to={`/signup`}>
+          <Button
+            width={"206px"}
+            fontSize={"12px"}
+            color={"#FAF4E1"}
+            fontWeight={"thin"}
+            variant="link">
+            회원가입
+          </Button>
+        </Link>
       </Box>
     </Flex>
   );
