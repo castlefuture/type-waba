@@ -17,10 +17,7 @@ export default function Login() {
         password: password,
       })
       .then((response) => {
-        // Handle success.
         console.log("Well done!");
-        // console.log("User token", response.data.jwt);
-        // localStorage.setItem("token", response.data.jwt);
         console.log("User token", response.data.token.access);
         localStorage.setItem("token", response.data.token.access);
         navigate("/");
