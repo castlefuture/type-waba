@@ -18,12 +18,11 @@ export default function Login() {
         password: password,
       })
       .then((response) => {
-        console.log("Well done!");
-        console.log("User token", response.data.token.access);
         localStorage.setItem("token", response.data.token.access);
         const accessToken = response.data.token.access;
-        setCookie("is_login", `${accessToken}`);
-        console.log({ accessToken });
+        setCookie("access", `${accessToken}`);
+        console.log("Well done!");
+        console.log("User token", { accessToken });
         navigate("/");
       });
   };
@@ -44,7 +43,8 @@ export default function Login() {
             color={"#333333"}
             value={email}
             rounded="none"
-            variant={"filled"}
+            px={"10px"}
+            variant={"unstyled"}
             placeholder="이메일"
             _placeholder={{ color: "#333333" }}
             onChange={(event) => {
@@ -59,7 +59,8 @@ export default function Login() {
             color={"#333333"}
             value={password}
             rounded="none"
-            variant={"filled"}
+            px={"10px"}
+            variant={"unstyled"}
             placeholder="비밀번호"
             _placeholder={{ color: "#333333" }}
             onChange={(event) => {

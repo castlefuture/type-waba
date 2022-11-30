@@ -41,7 +41,8 @@ export default function SearchPage() {
           type="text"
           rounded={"none"}
           onChange={(event) => onChangeHandler(event.target.value)}
-          variant={"filled"}
+          px={"10px"}
+          variant={"unstyled"}
           placeholder="와인 이름을 입력해주세요."
         />
         {wineName.map((search: { wine_id: number; kname: string }) => (
