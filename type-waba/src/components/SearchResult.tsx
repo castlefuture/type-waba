@@ -7,7 +7,7 @@ interface IRoomProps {
   pk: number;
 }
 
-export default function Search({ pk, wine_id, kname }: IRoomProps) {
+export default function SearchResult({ pk, wine_id, kname }: IRoomProps) {
   return (
     <Link to={`/wines/${pk}`}>
       <Box

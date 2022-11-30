@@ -1,9 +1,7 @@
-import { Box, Input, Text, VStack } from "@chakra-ui/react";
-import Search from "../components/Search";
-
+import { Box, Input, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-
 import axios from "axios";
+import SearchResult from "../components/SearchResult";
 
 export default function SearchPage() {
   const [inputValue, setInputValue] = useState("");
@@ -46,7 +44,7 @@ export default function SearchPage() {
           placeholder="와인 이름을 입력해주세요."
         />
         {wineName.map((search: { wine_id: number; kname: string }) => (
-          <Search
+          <SearchResult
             wine_id={search.wine_id}
             kname={search.kname}
             pk={search.wine_id}
