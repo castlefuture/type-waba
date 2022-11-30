@@ -1,15 +1,9 @@
-import { Box, Button, Input, Text, VStack } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
+import { Box, Input, Text, VStack } from "@chakra-ui/react";
 import Search from "../components/Search";
 
 import { useEffect, useState } from "react";
 
 import axios from "axios";
-
-interface ISearch {
-  wine_id: number;
-  kname: string;
-}
 
 export default function SearchPage() {
   const [inputValue, setInputValue] = useState("");
@@ -40,6 +34,7 @@ export default function SearchPage() {
           width={"246px"}
           height={"41px"}
           fontSize={"16px"}
+          // _hover={{ bg: "#FAF4E1" }}
           bg={"#FAF4E1"}
           color={"#333333"}
           value={inputValue}

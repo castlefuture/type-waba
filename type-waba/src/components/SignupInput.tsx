@@ -2,6 +2,7 @@ import { Box, Button, Input, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { setCookie } from "../cookie";
 
 export default function SignupInput() {
   const [email, setEmail] = useState("");
@@ -26,6 +27,8 @@ export default function SignupInput() {
         console.log("Well done!");
         console.log("User token", response.data.token.access);
         localStorage.setItem("token", response.data.token.access);
+        const accessToken = response.data.token.access;
+        setCookie("is_login", `${accessToken}`);
         navigate("/");
       });
   };

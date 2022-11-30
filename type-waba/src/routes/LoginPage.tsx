@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { setCookie } from "../cookie";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -20,6 +21,9 @@ export default function Login() {
         console.log("Well done!");
         console.log("User token", response.data.token.access);
         localStorage.setItem("token", response.data.token.access);
+        const accessToken = response.data.token.access;
+        setCookie("is_login", `${accessToken}`);
+        console.log({ accessToken });
         navigate("/");
       });
   };
