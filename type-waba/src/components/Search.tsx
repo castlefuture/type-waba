@@ -13,17 +13,14 @@ export default function Search({ pk, wine_id, kname }: IRoomProps) {
       <Box
         px={"16px"}
         width={"246px"}
-        height={"41px"}
+        minH={"41px"}
         fontSize={"16px"}
         bg={"#333333"}
         border={"1px"}
         borderColor={"#FAF4E1"}
         color={"#FAF4E1"}>
-        <Text fontSize="sm" color={"#F8F8F8"}>
-          wine_id : {wine_id}
-        </Text>
-        <Text as="b" noOfLines={2} fontSize="md" color={"#F8F8F8"}>
-          name : {kname}
+        <Text noOfLines={2} color={"#F8F8F8"}>
+          {kname}
         </Text>
       </Box>
     </Link>
