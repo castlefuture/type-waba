@@ -16,4 +16,4 @@ export const postDetail = () =>
   instance.post("winesearch/detail/11").then((response) => response.data);
 
 export const getDetail = () =>
-  instance.get("winesearch/detail/11").then((response) => response.data);
+  instance.get(`winesearch/detail/11`).then((response) => response.data);

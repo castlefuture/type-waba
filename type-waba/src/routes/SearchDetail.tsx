@@ -26,7 +26,7 @@ interface IInfo {
 
 export default function SearchDetail() {
   const { winePk } = useParams();
-  const { isLoading, data } = useQuery<IInfo[]>([`wines`, winePk], getDetail);
+  const { isLoading, data } = useQuery<IInfo[]>([`wine:${winePk}`], getDetail);
   console.log("data", data);
 
   return (
