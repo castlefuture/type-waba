@@ -1,21 +1,53 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Input, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
+import { useState, useEffect } from "react";
 
 export default function Test() {
-  const checkUser = () => {
-    axios
-      .post("http://3.38.2.131:8000/api/v1/winesearch/detail/11")
-      .then((response) => {
-        // Handle success.
-        console.log("Well done!");
-        // console.log("User token", response.data.jwt);
-        // localStorage.setItem("token", response.data.jwt);
-      });
+  /*   const [names, setNames] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  useEffect(() => {
+    const loadNames = async () => {
+      const response = await axios.get("https://reqres.in/api/users");
+
+      setNames(response.data.data);
+    };
+    loadNames();
+  }, []);
+
+  const onSuggestionHandler = (text: string) => {
+    setNames(text);
+    setSuggestions([]);
   };
 
+  const onChangeHandler = (text: string) => {
+    setInputValue(text);
+    console.log("input", inputValue);
+  }; */
+
   return (
-    <Box bg={"#333333"} minH={"1920px"}>
-      <Button onClick={checkUser}>hihi</Button>
-    </Box>
+    <div className="container">
+      {/*      <input
+        type="text"
+        className="col-md-12 input"
+        style={{ marginTop: 10 }}
+        onChange={(event) => onChangeHandler(event.target.value)}
+        value={inputValue}
+        onBlur={() => {
+          setTimeout(() => {
+            setSuggestions([]);
+          }, 100);
+        }}
+      />
+      {suggestions &&
+        suggestions.map((suggestions, i) => (
+          <div
+            key={i}
+            className="suggestion col-md-12 justify-content-md-center"
+            onClick={() => onSuggestionHandler(suggestions.email)}>
+            {suggestions.email}
+          </div>
+        ))} */}
+    </div>
   );
 }

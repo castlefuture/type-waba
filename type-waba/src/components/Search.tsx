@@ -1,4 +1,4 @@
-import { Box, Input, Text, VStack } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 interface IRoomProps {

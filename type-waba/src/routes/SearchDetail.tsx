@@ -2,6 +2,7 @@ import { Box, Button, Flex, Grid, Image, Text, VStack } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { postDetail } from "../api";
+import { getDetail } from "../api";
 
 interface IDetail {
   wine_id: number;
@@ -25,7 +26,7 @@ interface IInfo {
 
 export default function SearchDetail() {
   const { winePk } = useParams();
-  const { isLoading, data } = useQuery<IInfo[]>([`wines`, winePk], postDetail);
+  const { isLoading, data } = useQuery<IInfo[]>([`wines`, winePk], getDetail);
   console.log("data", data);
 
   return (
