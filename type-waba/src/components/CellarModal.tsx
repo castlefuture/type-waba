@@ -78,7 +78,7 @@ export default function CellarModal({ isOpen, onClose }: CellarModalProps) {
                 color={"#333333"}
                 rounded={"8px"}
                 variant={"unstyled"}
-                placeholder="만족도">
+                placeholder=" 만족도">
                 <option value="option1">좋음</option>
                 <option value="option2">보통</option>
                 <option value="option3">나쁨</option>
@@ -106,17 +106,20 @@ export default function CellarModal({ isOpen, onClose }: CellarModalProps) {
                   value={tag}
                   onChange={(event) => onChangeHandler(event.target.value)}
                 />
-                <Button onClick={addTag}>추가</Button>
+                <Button bg={"#2C4934"} color={"#FAF4E1"} onClick={addTag}>
+                  추가
+                </Button>
               </Grid>
 
               <Box>
                 {tagList.map((item) => (
                   <Tag
+                    colorScheme={"yellow"}
                     marginRight={"5px"}
                     size="sm"
                     key="sm"
                     borderRadius="4px"
-                    variant="solid">
+                    variant="outline">
                     <TagLabel>#{item}</TagLabel>
                   </Tag>
                 ))}
