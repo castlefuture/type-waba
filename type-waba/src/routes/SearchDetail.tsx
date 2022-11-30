@@ -3,7 +3,6 @@ import {
   Button,
   Flex,
   Grid,
-  HStack,
   Image,
   Input,
   Modal,
@@ -12,8 +11,8 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Select,
   Tag,
-  TagCloseButton,
   TagLabel,
   Text,
   useDisclosure,
@@ -21,24 +20,12 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
+import CellarModal from "../components/CellarModal";
 import { getCookie } from "../cookie";
 
 export default function SearchDetail() {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [tag, setTag] = useState("");
-  const [tagList, setTagList] = useState<string[]>([]);
 
-  const addTag = () => {
-    setTagList([...tagList, tag]);
-    console.log(tagList);
-  };
-
-  const resetTag = () => {
-    setTagList([]);
-  };
-  const onChangeHandler = (text: string) => {
-    setTag(text);
-  };
   const [wineInfo, setWineInfo] = useState([]);
   const loadInfos = async () => {
     const response = await axios.get(
@@ -236,114 +223,7 @@ export default function SearchDetail() {
         onClick={onOpen}>
         셀러에 담기
       </Button>
-      <Modal motionPreset="scale" isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay
-          bg="whiteAlpha.300"
-          backdropFilter="blur(2px) hue-rotate(90deg)"
-        />
-        <ModalContent width={"359px"}>
-          <ModalHeader bg={"#333333"} color={"#F8F8F8"}>
-            셀러 등록
-          </ModalHeader>
-          <ModalBody bg={"#333333"}>
-            <VStack>
-              <Box>
-                <Text fontSize={"16px"} color={"#FAF4E1"}>
-                  날짜
-                </Text>
-                <Input
-                  width={"310px"}
-                  height={"41px"}
-                  fontSize={"16px"}
-                  bg={"#FAF4E1"}
-                  color={"#333333"}
-                  type="text"
-                  rounded={"8px"}
-                  px={"10px"}
-                  variant={"unstyled"}
-                  placeholder="YYYY-MM-DD"
-                />
-              </Box>
-              <Box>
-                <Text fontSize={"16px"} color={"#FAF4E1"}>
-                  만족도
-                </Text>
-
-                <Grid
-                  width={"310px"}
-                  gap={"20px"}
-                  templateColumns={"1fr 1fr 1fr"}>
-                  <Button
-                    height={"45px"}
-                    fontSize={"20px"}
-                    bg={"#FAF4E1"}
-                    color={"#333333"}>
-                    나쁨
-                  </Button>
-                  <Button
-                    height={"45px"}
-                    fontSize={"20px"}
-                    bg={"#FAF4E1"}
-                    color={"#333333"}>
-                    보통
-                  </Button>
-                  <Button
-                    height={"45px"}
-                    fontSize={"20px"}
-                    bg={"#FAF4E1"}
-                    color={"#333333"}>
-                    좋음
-                  </Button>
-                </Grid>
-              </Box>
-              <Box mb={"12px"}>
-                <Text fontSize={"16px"} color={"#FAF4E1"}>
-                  해시태그
-                </Text>
-                <Input
-                  width={"310px"}
-                  height={"41px"}
-                  fontSize={"16px"}
-                  bg={"#FAF4E1"}
-                  color={"#333333"}
-                  type="text"
-                  rounded={"8px"}
-                  px={"10px"}
-                  variant={"unstyled"}
-                  placeholder="해시태그를 입력해주세요."
-                  value={tag}
-                  onChange={(event) => onChangeHandler(event.target.value)}
-                />
-                <Button onClick={addTag}>추가</Button>
-                <Button onClick={resetTag}>태그 초기화</Button>
-
-                <HStack spacing={4}>
-                  {tagList.map((item) => (
-                    <Tag
-                      size="sm"
-                      key="sm"
-                      borderRadius="4px"
-                      variant="solid"
-                      colorScheme="green">
-                      <TagLabel>#{item}</TagLabel>
-                    </Tag>
-                  ))}
-                </HStack>
-              </Box>
-            </VStack>
-          </ModalBody>
-          <ModalFooter bg={"#333333"}>
-            <Button
-              width={"80px"}
-              height={"45px"}
-              fontSize={"20px"}
-              bg={"#D1654E"}
-              color={"#FAF4E1"}>
-              등록
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <CellarModal isOpen={isOpen} onClose={onClose} />
     </VStack>
   );
 }
