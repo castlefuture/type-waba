@@ -8,7 +8,7 @@ export default function Test() {
       user_id: 3,
     })
     .then((response) => {
-      console.log("Well done!");
+      console.log("Well done!", response.data);
     });
 
   return <Box>hi</Box>;

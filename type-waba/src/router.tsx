@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <SearchPage />,
       },
       {
-        path: "wines/:searchPk",
+        path: "wines/:winePk",
         element: <SearchDetail />,
       },
       {

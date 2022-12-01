@@ -3,36 +3,35 @@ import {
   Button,
   Flex,
   Grid,
+  Heading,
   Image,
+  List,
+  Skeleton,
   Text,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { postDetail } from "../api";
 import CellarModal from "../components/CellarModal";
+import { IWine, IWineDetail } from "../types";
 
 export default function SearchDetail() {
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { winePk } = useParams();
+  const { isLoading, data } = useQuery<IWine>([`wines`, winePk], postDetail);
 
-  const [wineInfo, setWineInfo] = useState([]);
-  const loadInfos = async () => {
-    const response = await axios.post(
-      `http://3.38.2.131:8000/api/v1/winesearch/detail/231`,
-      {
-        user_id: 3,
-      }
-    );
-    setWineInfo(response.data);
-    console.log(wineInfo);
-  };
+  console.log(data?.wine_detail.kname);
+
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
     <VStack px={"16px"} py={"30px"} justifyContent="center">
       <Box mb={"20px"} w="100%" as="b" fontSize={"24px"} color={"#F8F8F8"}>
         검색 결과
       </Box>
-      <Button onClick={loadInfos}>검색</Button>
       <Grid gap={"20px"} templateColumns={"131px 207px"}>
         <Flex
           width={"131px"}
@@ -41,33 +40,33 @@ export default function SearchDetail() {
           position="relative"
           overflow={"hidden"}
           rounded={"8px"}>
-          <Image src="https://wine21.speedgabia.com/WINE_MST/TITLE/0172000/W0172231.png" />
+          <Image src={data?.wine_detail.wine_picture} />
         </Flex>
         <Box>
           <Button
-            width={"56px"}
             height={"19px"}
+            px={"5px"}
             fontSize={"10px"}
             rounded={"4px"}
             bg={"#EB5E27"}
             color={"#FAF4E1"}>
-            레드와인
+            {data?.wine_detail.winetype}와인
           </Button>
           <Text as="b" noOfLines={2} fontSize={"14px"} color={"#F8F8F8"}>
-            휴잇슨, 모노폴 마더바인 쉬라즈 블랑 드 샴팡
+            {data?.wine_detail.kname}
           </Text>
           <Text noOfLines={1} fontSize={"10px"} color={"#F8F8F8"}>
-            Hewitson, Mother Vine Shiraz
+            {data?.wine_detail.ename}
           </Text>
           <VStack alignItems="flex-start" mt={5} spacing={"2px"}>
-            <Text fontSize={"12px"} color={"#F8F8F8"}>
-              양조장 : 몬테스
+            <Text fontSize={"12px"} color={"#F8F8F8"} noOfLines={1}>
+              양조장 : {data?.wine_detail.winery}
             </Text>
             <Text fontSize={"12px"} color={"#F8F8F8"}>
-              국가 : 칠레
+              국가 : {data?.wine_detail.kr_country}
             </Text>
             <Text fontSize={"12px"} color={"#F8F8F8"}>
-              생산지역 : 콜차구아 밸리
+              생산지역 : {data?.wine_detail.kr_region}
             </Text>
           </VStack>
           <Box mt={3} px={3} py={3} rounded={"xl"} bg={"#2C4934"}>
@@ -158,16 +157,16 @@ export default function SearchDetail() {
               </VStack>
               <VStack alignItems="flex-end">
                 <Text fontSize={"12px"} color={"#F8F8F8"}>
-                  아주높음
+                  {data?.wine_detail.sweet}
                 </Text>
                 <Text fontSize={"12px"} color={"#F8F8F8"}>
-                  약간높음
+                  {data?.wine_detail.acidic}
                 </Text>
                 <Text fontSize={"12px"} color={"#F8F8F8"}>
-                  아주약함
+                  {data?.wine_detail.body}
                 </Text>
                 <Text fontSize={"12px"} color={"#F8F8F8"}>
-                  약함
+                  {data?.wine_detail.tannic}
                 </Text>
               </VStack>
             </Grid>
@@ -180,7 +179,7 @@ export default function SearchDetail() {
             포도품종
           </Text>
           <Text fontSize="sm" color={"#F8F8F8"}>
-            카르메네르, 카르베 소비뇽
+            {data?.wine_detail.kr_grape_list}
           </Text>
         </Box>
         <Box>
@@ -188,7 +187,7 @@ export default function SearchDetail() {
             노트
           </Text>
           <Text fontSize="sm" color={"#F8F8F8"}>
-            체리, 기죽
+            {data?.wine_detail.notes_list}
           </Text>
         </Box>
         <Box>
@@ -196,7 +195,7 @@ export default function SearchDetail() {
             추천 음식
           </Text>
           <Text fontSize="sm" color={"#F8F8F8"}>
-            치즈, 고기
+            {data?.wine_detail.food_list}
           </Text>
         </Box>
       </VStack>
