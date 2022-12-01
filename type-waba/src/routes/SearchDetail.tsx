@@ -4,16 +4,6 @@ import {
   Flex,
   Grid,
   Image,
-  Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Select,
-  Tag,
-  TagLabel,
   Text,
   useDisclosure,
   VStack,
@@ -21,20 +11,16 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import CellarModal from "../components/CellarModal";
-import { getCookie } from "../cookie";
 
 export default function SearchDetail() {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   const [wineInfo, setWineInfo] = useState([]);
   const loadInfos = async () => {
-    const response = await axios.get(
+    const response = await axios.post(
       `http://3.38.2.131:8000/api/v1/winesearch/detail/231`,
       {
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${getCookie("access")}`,
-        },
+        user_id: 3,
       }
     );
     setWineInfo(response.data);
@@ -46,7 +32,7 @@ export default function SearchDetail() {
       <Box mb={"20px"} w="100%" as="b" fontSize={"24px"} color={"#F8F8F8"}>
         검색 결과
       </Box>
-      {/* <Button onClick={getWine}>검색</Button> */}
+      <Button onClick={loadInfos}>검색</Button>
       <Grid gap={"20px"} templateColumns={"131px 207px"}>
         <Flex
           width={"131px"}

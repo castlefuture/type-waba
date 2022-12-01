@@ -5,6 +5,12 @@ import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import theme from "./theme";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { getCookie } from "./cookie";
+import axios from "axios";
+
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.headers.common["X-CSRFToken"] = getCookie("csrftoken");
 
 const client = new QueryClient();
 
