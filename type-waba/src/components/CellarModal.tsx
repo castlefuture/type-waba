@@ -15,28 +15,47 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { useState } from "react";
 
 interface CellarModalProps {
   isOpen: boolean;
   onClose: () => void;
+  wine_id?: number;
 }
 
-export default function CellarModal({ isOpen, onClose }: CellarModalProps) {
-  const [tag, setTag] = useState("");
+export default function CellarModal({
+  isOpen,
+  onClose,
+  wine_id,
+}: CellarModalProps) {
+  const [date, setDate] = useState("");
+  const [assessment, setAssessment] = useState("");
+  const [hashtag, setHashtag] = useState("");
   const [tagList, setTagList] = useState<string[]>([]);
 
-  const addTag = () => {
-    setTagList([...tagList, tag]);
-    setTag("");
+  console.log(date, assessment, tagList);
+  const addHashtag = () => {
+    setTagList([...tagList, hashtag]);
+    setHashtag("");
   };
 
-  const resetTag = () => {
+  const resetHashtag = () => {
     setTagList([]);
   };
   const onChangeHandler = (text: string) => {
-    setTag(text);
+    setHashtag(text);
   };
+
+  const sendCellar = () => {
+    axios.post(`http://3.38.2.131:8000/api/v1/winesearch/${wine_id}/addWine`, {
+      // wine_id: wine_id,
+      assessment: assessment,
+      date: date,
+      hashtag: hashtag,
+    });
+  };
+
   return (
     <Modal motionPreset="scale" isOpen={isOpen} onClose={onClose}>
       <ModalOverlay
@@ -64,6 +83,8 @@ export default function CellarModal({ isOpen, onClose }: CellarModalProps) {
                 px={"10px"}
                 variant={"unstyled"}
                 placeholder="YYYY-MM-DD"
+                value={date}
+                onChange={(event) => setDate(event.target.value)}
               />
             </Box>
             <Box>
@@ -78,10 +99,12 @@ export default function CellarModal({ isOpen, onClose }: CellarModalProps) {
                 color={"#333333"}
                 rounded={"8px"}
                 variant={"unstyled"}
-                placeholder=" 만족도">
-                <option value="option1">좋음</option>
-                <option value="option2">보통</option>
-                <option value="option3">나쁨</option>
+                placeholder=" 만족도"
+                value={assessment}
+                onChange={(event) => setAssessment(event.target.value)}>
+                <option value="좋음">좋음</option>
+                <option value="보통">보통</option>
+                <option value="나쁨">나쁨</option>
               </Select>
             </Box>
             <Box mb={"12px"}>
@@ -103,10 +126,10 @@ export default function CellarModal({ isOpen, onClose }: CellarModalProps) {
                   px={"10px"}
                   variant={"unstyled"}
                   placeholder="해시태그를 입력해주세요."
-                  value={tag}
+                  value={hashtag}
                   onChange={(event) => onChangeHandler(event.target.value)}
                 />
-                <Button bg={"#2C4934"} color={"#FAF4E1"} onClick={addTag}>
+                <Button bg={"#2C4934"} color={"#FAF4E1"} onClick={addHashtag}>
                   추가
                 </Button>
               </Grid>
@@ -135,7 +158,7 @@ export default function CellarModal({ isOpen, onClose }: CellarModalProps) {
             fontSize={"16px"}
             bg={"#D1654E"}
             color={"#FAF4E1"}
-            onClick={resetTag}>
+            onClick={resetHashtag}>
             태그 초기화
           </Button>
           <Button
@@ -143,7 +166,10 @@ export default function CellarModal({ isOpen, onClose }: CellarModalProps) {
             height={"41px"}
             fontSize={"16px"}
             bg={"#D1654E"}
-            color={"#FAF4E1"}>
+            color={"#FAF4E1"}
+            onClick={() => {
+              sendCellar();
+            }}>
             등록
           </Button>
         </ModalFooter>

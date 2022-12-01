@@ -3,27 +3,22 @@ import {
   Button,
   Flex,
   Grid,
-  Heading,
   Image,
-  List,
-  Skeleton,
   Text,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { postDetail } from "../api";
 import CellarModal from "../components/CellarModal";
-import { IWine, IWineDetail } from "../types";
+import { IWine } from "../types";
 
 export default function SearchDetail() {
   const { winePk } = useParams();
   const { isLoading, data } = useQuery<IWine>([`wines`, winePk], postDetail);
 
-  console.log(data?.wine_detail.kname);
+  const wine_id = data?.wine_detail.wine_id;
 
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -208,7 +203,7 @@ export default function SearchDetail() {
         onClick={onOpen}>
         셀러에 담기
       </Button>
-      <CellarModal isOpen={isOpen} onClose={onClose} />
+      <CellarModal isOpen={isOpen} onClose={onClose} wine_id={wine_id} />
     </VStack>
   );
 }

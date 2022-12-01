@@ -5,7 +5,7 @@ interface IWineProps {
 }
 
 export interface IWineDetail {
-  wine_id: string;
+  wine_id: number;
   wine_picture: string;
   kname: string;
   ename: string;
