@@ -1,8 +1,8 @@
 import {
   Box,
   Button,
-  Flex,
   Grid,
+  HStack,
   Image,
   Text,
   useDisclosure,
@@ -11,7 +11,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { postDetail } from "../api";
-import CellarModal from "../components/CellarModal";
+import CellarAddModal from "../components/CellarAddModal";
 import { IWine } from "../types";
 
 export default function SearchDetail() {
@@ -28,15 +28,15 @@ export default function SearchDetail() {
         검색 결과
       </Box>
       <Grid gap={"20px"} templateColumns={"131px 207px"}>
-        <Flex
+        <HStack
           width={"131px"}
           height={"291px"}
           bg={"#ffffff"}
           position="relative"
           overflow={"hidden"}
           rounded={"8px"}>
-          <Image src={data?.wine_detail.wine_picture} />
-        </Flex>
+          <Image width={"100%"} src={data?.wine_detail.wine_picture} />
+        </HStack>
         <Box>
           <Button
             height={"19px"}
@@ -203,7 +203,7 @@ export default function SearchDetail() {
         onClick={onOpen}>
         셀러에 담기
       </Button>
-      <CellarModal isOpen={isOpen} onClose={onClose} wine_id={wine_id} />
+      <CellarAddModal isOpen={isOpen} onClose={onClose} wine_id={wine_id} />
     </VStack>
   );
 }

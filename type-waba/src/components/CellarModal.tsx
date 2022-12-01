@@ -2,6 +2,8 @@ import {
   Box,
   Button,
   Grid,
+  HStack,
+  Image,
   Input,
   Modal,
   ModalBody,
@@ -9,14 +11,12 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
-  Tag,
-  TagLabel,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface CellarModalProps {
   isOpen: boolean;
@@ -29,33 +29,6 @@ export default function CellarModal({
   onClose,
   wine_id,
 }: CellarModalProps) {
-  const [date, setDate] = useState("");
-  const [assessment, setAssessment] = useState("");
-  const [hashtag, setHashtag] = useState("");
-  const [tagList, setTagList] = useState<string[]>([]);
-
-  console.log(date, assessment, tagList);
-  const addHashtag = () => {
-    setTagList([...tagList, hashtag]);
-    setHashtag("");
-  };
-
-  const resetHashtag = () => {
-    setTagList([]);
-  };
-  const onChangeHandler = (text: string) => {
-    setHashtag(text);
-  };
-
-  const sendCellar = () => {
-    axios.post(`http://3.38.2.131:8000/api/v1/winesearch/${wine_id}/addWine`, {
-      // wine_id: wine_id,
-      assessment: assessment,
-      date: date,
-      hashtag: hashtag,
-    });
-  };
-
   return (
     <Modal motionPreset="scale" isOpen={isOpen} onClose={onClose}>
       <ModalOverlay
@@ -63,115 +36,83 @@ export default function CellarModal({
         backdropFilter="blur(2px) hue-rotate(90deg)"
       />
       <ModalContent width={"359px"}>
-        <ModalHeader bg={"#333333"} color={"#F8F8F8"} borderBottomWidth={1}>
-          셀러 등록
+        <ModalHeader bg={"#2C4934"} color={"#F8F8F8"} borderBottomWidth={1}>
+          셀러 보기
         </ModalHeader>
-        <ModalBody py={"30px"} bg={"#333333"}>
+        <ModalBody py={"30px"} bg={"#FAF4E1"}>
           <VStack>
             <Box>
-              <Text fontSize={"16px"} color={"#FAF4E1"}>
-                날짜
-              </Text>
-              <Input
-                width={"310px"}
-                height={"41px"}
-                fontSize={"16px"}
-                bg={"#FAF4E1"}
-                color={"#333333"}
-                type="text"
-                rounded={"8px"}
-                px={"10px"}
-                variant={"unstyled"}
-                placeholder="YYYY-MM-DD"
-                value={date}
-                onChange={(event) => setDate(event.target.value)}
-              />
-            </Box>
-            <Box>
-              <Text fontSize={"16px"} color={"#FAF4E1"}>
-                만족도
-              </Text>
-              <Select
-                width={"310px"}
-                height={"41px"}
-                fontSize={"16px"}
-                bg={"#FAF4E1"}
-                color={"#333333"}
-                rounded={"8px"}
-                variant={"unstyled"}
-                placeholder=" 만족도"
-                value={assessment}
-                onChange={(event) => setAssessment(event.target.value)}>
-                <option value="좋음">좋음</option>
-                <option value="보통">보통</option>
-                <option value="나쁨">나쁨</option>
-              </Select>
-            </Box>
-            <Box mb={"12px"}>
-              <Text fontSize={"16px"} color={"#FAF4E1"}>
-                해시태그
-              </Text>
-              <Grid
-                mb={"10px"}
-                gap={"15px"}
-                width={"310px"}
-                templateColumns={"3fr 1fr"}>
-                <Input
-                  height={"41px"}
-                  fontSize={"16px"}
-                  bg={"#FAF4E1"}
-                  color={"#333333"}
-                  type="text"
-                  rounded={"8px"}
-                  px={"10px"}
-                  variant={"unstyled"}
-                  placeholder="해시태그를 입력해주세요."
-                  value={hashtag}
-                  onChange={(event) => onChangeHandler(event.target.value)}
-                />
-                <Button bg={"#2C4934"} color={"#FAF4E1"} onClick={addHashtag}>
-                  추가
-                </Button>
+              <Grid gap={"15px"} templateColumns={"131px 181px"}>
+                <HStack
+                  width={"131px"}
+                  height={"291px"}
+                  bg={"#ffffff"}
+                  position="relative"
+                  overflow={"hidden"}
+                  rounded={"8px"}>
+                  <Image
+                    width={"100%"}
+                    src="https://wine21.speedgabia.com/WINE_MST/TITLE/0172000/W0172231.png"
+                  />
+                </HStack>
+                <VStack justify={"center"} alignItems="flex-start">
+                  <Box>
+                    <Text
+                      fontWeight={"bold"}
+                      fontSize={"14px"}
+                      color={"#333333"}>
+                      2022년 12월 11일
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Text fontSize={"14px"} color={"#333333"}>
+                      #달달한와인 #20대마지막파티 #친구들이랑 #선물 #비쌈
+                    </Text>
+                  </Box>
+                </VStack>
               </Grid>
-
-              <Box>
-                {tagList.map((item) => (
-                  <Tag
-                    colorScheme={"yellow"}
-                    marginRight={"5px"}
-                    size="sm"
-                    key="sm"
-                    borderRadius="4px"
-                    variant="outline">
-                    <TagLabel>#{item}</TagLabel>
-                  </Tag>
-                ))}
+              <Box mt={"15px"}>
+                <Button
+                  height={"19px"}
+                  mb={"10px"}
+                  px={"5px"}
+                  fontSize={"10px"}
+                  rounded={"4px"}
+                  bg={"#EB5E27"}
+                  color={"#FAF4E1"}>
+                  화이트와인
+                </Button>
+                <Text as="b" noOfLines={2} fontSize={"14px"} color={"#333333"}>
+                  타베르넬로 비앙코 프리잔테
+                </Text>
+                <Text noOfLines={1} fontSize={"10px"} color={"#333333"}>
+                  Tavernello Bianco Fizzante
+                </Text>
+                <VStack alignItems="flex-start" mt={5} spacing={"2px"}>
+                  <Text fontSize={"12px"} color={"333333"} noOfLines={1}>
+                    양조장 : 까비로 Caviro sca-Forli
+                  </Text>
+                  <Text fontSize={"12px"} color={"333333"}>
+                    국가 : 이탈리아
+                  </Text>
+                  <Text fontSize={"12px"} color={"333333"}>
+                    생산지역 : 에밀리아 로마냐
+                  </Text>
+                </VStack>
               </Box>
             </Box>
           </VStack>
         </ModalBody>
-        <ModalFooter bg={"#333333"}>
-          <Button
-            marginRight={"20px"}
-            width={"128px"}
-            height={"41px"}
-            fontSize={"16px"}
-            bg={"#D1654E"}
-            color={"#FAF4E1"}
-            onClick={resetHashtag}>
-            태그 초기화
-          </Button>
-          <Button
-            width={"80px"}
-            height={"41px"}
-            fontSize={"16px"}
-            bg={"#D1654E"}
-            color={"#FAF4E1"}
-            onClick={() => {
-              sendCellar();
-            }}>
-            등록
-          </Button>
+        <ModalFooter bg={"#FAF4E1"}>
+          <Link to={`/wines/22`}>
+            <Button
+              height={"41px"}
+              fontSize={"16px"}
+              bg={"#D1654E"}
+              color={"#FAF4E1"}>
+              와인 정보
+            </Button>
+          </Link>
         </ModalFooter>
       </ModalContent>
     </Modal>
