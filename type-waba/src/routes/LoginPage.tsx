@@ -1,9 +1,18 @@
-import { Box, Button, Flex, Input, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  Input,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { setCookie } from "../cookie";
+import mainimage from "../img/mainimage.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -32,8 +41,9 @@ export default function Login() {
     }
   }, []);
   return (
-    <Flex mt={"223px"} px={"16px"} py={"30px"} justifyContent="center">
-      <Box width={"206px"} alignContent="center">
+    <Flex mt={"120px"} px={"16px"} py={"30px"} justifyContent="center">
+      <VStack width={"206px"} alignContent="center">
+        <Image mb={"20px"} width={"167px"} src={mainimage} rounded="full" />
         <VStack mb={"20px"}>
           <Input
             mb={"6px"}
@@ -91,7 +101,7 @@ export default function Login() {
             회원가입
           </Button>
         </Link>
-      </Box>
+      </VStack>
     </Flex>
   );
 }

@@ -1,37 +1,12 @@
-import {
-  Box,
-  Button,
-  HStack,
-  IconButton,
-  LightMode,
-  Stack,
-  Text,
-  useColorMode,
-  useColorModeValue,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { FaWineBottle, FaMoon, FaSun } from "react-icons/fa";
-import LoginModal from "./LoginModal";
-import SignUpModal from "./SignUpModal";
+import { Image, Stack, Text, useDisclosure } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import logo from "../img/logo.png";
 
 export default function Header() {
-  const {
-    isOpen: isLoginOpen,
-    onClose: onLoginClose,
-    onOpen: onLoginOpen,
-  } = useDisclosure();
-  const {
-    isOpen: isSignUpOpen,
-    onClose: onSignUpClose,
-    onOpen: onSignUpOpen,
-  } = useDisclosure();
-  const { colorMode, toggleColorMode } = useColorMode();
-  const logoColor = useColorModeValue("red.500", "red.200");
-  const Icon = useColorModeValue(FaMoon, FaSun);
   return (
     <Stack
       bg={"#333333"}
-      justifyContent={"space-between"}
+      justifyContent={"center"}
       alignItems="center"
       width={"390px"}
       py={"30px"}
@@ -42,7 +17,9 @@ export default function Header() {
         md: 0,
       }}
       borderBottomWidth={1}>
-      <Text>wabawachi</Text>
+      <Link to={`/login`}>
+        <Image width={"167px"} src={logo} />
+      </Link>
     </Stack>
   );
 }
