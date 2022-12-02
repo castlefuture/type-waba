@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Image,
-  Input,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, Flex, Image, Input, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -22,7 +14,6 @@ export default function Login() {
   const checkUser = () => {
     axios
       .post("http://3.38.2.131:8000/api/v1/users/auth/", {
-        //보내고자 하는 데이터
         email: email,
         password: password,
       })
