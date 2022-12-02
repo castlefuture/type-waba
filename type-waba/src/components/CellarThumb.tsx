@@ -10,7 +10,7 @@ export default function CellarThumb({
 }: ICellarList) {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
-    <Link to={`/cellars/${pk}`}>
+    <Link to={`/reviews/${pk}`}>
       <HStack
         height={"120px"}
         position="relative"

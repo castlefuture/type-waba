@@ -3,11 +3,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 import CellarThumb from "../components/CellarThumb";
-import { ICellar, ICellarList } from "../types";
 
 export default function Cellar() {
   const [cellarList, setCellarList] = useState([]);
-  const [wineCellar, setWineCellar] = useState([]);
 
   const loadCellar = async () => {
     const response = await axios.post(
