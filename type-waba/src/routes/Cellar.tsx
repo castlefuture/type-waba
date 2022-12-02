@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Text, VStack } from "@chakra-ui/react";
+import { Box, Grid, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -6,7 +6,6 @@ import CellarThumb from "../components/CellarThumb";
 
 export default function Cellar() {
   const [cellarList, setCellarList] = useState([]);
-
   const loadCellar = async () => {
     const response = await axios.post(
       `http://3.38.2.131:8000/api/v1/wineceller/`,
@@ -15,7 +14,6 @@ export default function Cellar() {
       }
     );
     setCellarList(response.data);
-    console.log(cellarList);
   };
 
   useEffect(() => {
@@ -68,7 +66,6 @@ export default function Cellar() {
           <CellarThumb
             wine_id={cellar.wine_id}
             wine_picture={cellar.wine_picture}
-            pk={cellar.wine_id}
           />
         ))}
       </Grid>

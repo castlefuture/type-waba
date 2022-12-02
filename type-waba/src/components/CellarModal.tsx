@@ -13,8 +13,12 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 import { Link } from "react-router-dom";
+import { postReview } from "../api";
+import { IReview } from "../types";
 
 interface CellarModalProps {
   isOpen: boolean;
@@ -27,6 +31,10 @@ export default function CellarModal({
   onClose,
   wine_id,
 }: CellarModalProps) {
+  const { isLoading, data } = useQuery<IReview>([wine_id], postReview);
+
+  useEffect(() => {}, []);
+
   return (
     <Modal motionPreset="scale" isOpen={isOpen} onClose={onClose}>
       <ModalOverlay
@@ -48,10 +56,7 @@ export default function CellarModal({
                   position="relative"
                   overflow={"hidden"}
                   rounded={"8px"}>
-                  <Image
-                    width={"100%"}
-                    src="https://wine21.speedgabia.com/WINE_MST/TITLE/0172000/W0172231.png"
-                  />
+                  <Image width={"100%"} src={data?.wine.wine_picture} />
                 </HStack>
                 <VStack justify={"center"} alignItems="flex-start">
                   <Box>
@@ -64,7 +69,7 @@ export default function CellarModal({
                   </Box>
                   <Box>
                     <Text fontSize={"14px"} color={"#333333"}>
-                      #달달한와인 #20대마지막파티 #친구들이랑 #선물 #비쌈
+                      {data?.wine_review.hashtag}
                     </Text>
                   </Box>
                 </VStack>
@@ -78,23 +83,23 @@ export default function CellarModal({
                   rounded={"4px"}
                   bg={"#EB5E27"}
                   color={"#FAF4E1"}>
-                  화이트와인
+                  {data?.wine.winetype}와인
                 </Button>
                 <Text as="b" noOfLines={2} fontSize={"14px"} color={"#333333"}>
-                  타베르넬로 비앙코 프리잔테
+                  {data?.wine.kname}
                 </Text>
                 <Text noOfLines={1} fontSize={"10px"} color={"#333333"}>
-                  Tavernello Bianco Fizzante
+                  {data?.wine.ename}
                 </Text>
                 <VStack alignItems="flex-start" mt={5} spacing={"2px"}>
                   <Text fontSize={"12px"} color={"333333"} noOfLines={1}>
-                    양조장 : 까비로 Caviro sca-Forli
+                    양조장 : {data?.wine.winery}
                   </Text>
                   <Text fontSize={"12px"} color={"333333"}>
-                    국가 : 이탈리아
+                    국가 : {data?.wine.kr_country}
                   </Text>
                   <Text fontSize={"12px"} color={"333333"}>
-                    생산지역 : 에밀리아 로마냐
+                    생산지역 : {data?.wine.kr_region}
                   </Text>
                 </VStack>
               </Box>
@@ -102,7 +107,7 @@ export default function CellarModal({
           </VStack>
         </ModalBody>
         <ModalFooter bg={"#FAF4E1"}>
-          <Link to={`/wines/22`}>
+          <Link to={`/wines/${data?.wine.wine_id}`}>
             <Button
               height={"41px"}
               fontSize={"16px"}

@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Box, VStack } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { postReview } from "../api";
@@ -12,5 +12,14 @@ export default function CellarReview() {
   );
   console.log(data?.wine.ename);
   console.log(data?.wine_review.assessment);
-  return <Text>hi</Text>;
+  return (
+    <VStack px={"16px"} py={"30px"} justifyContent="center">
+      <Box
+        mb={"20px"}
+        w="100%"
+        as="b"
+        fontSize={"24px"}
+        color={"#F8F8F8"}></Box>
+    </VStack>
+  );
 }

@@ -22,8 +22,8 @@ export const postDetail = ({ queryKey }: QueryFunctionContext) => {
 };
 
 export const postReview = ({ queryKey }: QueryFunctionContext) => {
-  const [, reviewPk] = queryKey;
+  const wine_id = queryKey;
   return instance
-    .post(`wineceller/detail/977`, { user_id: 3 })
+    .post(`wineceller/detail/${wine_id}`, { user_id: 3 })
     .then((response) => response.data);
 };

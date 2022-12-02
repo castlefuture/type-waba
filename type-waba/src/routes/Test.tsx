@@ -1,15 +1,25 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { postReview } from "../api";
+import { IReview } from "../types";
 
 export default function Test() {
-  const response = axios
-    .post(`http://3.38.2.131:8000/api/v1/wineceller/detail/977`, {
-      //보내고자 하는 데이터
-      user_id: 3,
-    })
-    .then((response) => {
-      console.log("Well done!", response.data);
-    });
+  const { isLoading, data } = useQuery<IReview>([], postReview);
+  console.log(data?.wine.ename);
+  console.log(data?.wine_review.assessment);
 
-  return <Box>hi</Box>;
+  return (
+    <Box>
+      hi
+      {/*       <Button
+        onClick={() => {
+          loadReview();
+        }}>
+        go
+      </Button> */}
+    </Box>
+  );
 }

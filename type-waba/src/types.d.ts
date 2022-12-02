@@ -28,7 +28,6 @@ export interface IWine {
 }
 
 export interface ICellarList {
-  pk: number;
   wine_id: number;
   wine_picture: string;
 }
