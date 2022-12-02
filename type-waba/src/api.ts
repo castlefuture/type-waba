@@ -15,7 +15,16 @@ export const getSearchs = ({ queryKey }: QueryFunctionContext) => {
 export const postDetail = ({ queryKey }: QueryFunctionContext) => {
   const [, winePk] = queryKey;
   return instance
-    .post(`http://3.38.2.131:8000/api/v1/winesearch/detail/${winePk}`, {
+    .post(`winesearch/detail/${winePk}`, {
+      user_id: 3,
+    })
+    .then((response) => response.data);
+};
+
+export const postReview = ({ queryKey }: QueryFunctionContext) => {
+  const [, reviewPk] = queryKey;
+  return instance
+    .post(`wineceller/detail/${reviewPk} `, {
       user_id: 3,
     })
     .then((response) => response.data);

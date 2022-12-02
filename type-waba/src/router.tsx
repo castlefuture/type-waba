@@ -11,6 +11,7 @@ import SearchDetail from "./routes/SearchDetail";
 import Login from "./routes/LoginPage";
 import Test from "./routes/Test";
 import Signup from "./routes/SignupPage";
+import CellarReview from "./routes/CellarReview";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "cellar",
         element: <Cellar />,
+      },
+      {
+        path: "reviews/:reviewPk",
+        element: <CellarReview />,
       },
       {
         path: "find",

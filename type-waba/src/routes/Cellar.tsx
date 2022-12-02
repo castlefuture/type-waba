@@ -1,21 +1,29 @@
-import {
-  Box,
-  Button,
-  Grid,
-  HStack,
-  Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Skeleton,
-  SkeletonText,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Grid, Text, VStack } from "@chakra-ui/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 import CellarThumb from "../components/CellarThumb";
-import Room from "../components/Room";
+import { ICellar, ICellarList } from "../types";
 
 export default function Cellar() {
+  const [cellarList, setCellarList] = useState([]);
+  const [wineCellar, setWineCellar] = useState([]);
+
+  const loadCellar = async () => {
+    const response = await axios.post(
+      `http://3.38.2.131:8000/api/v1/wineceller/`,
+      {
+        user_id: 3,
+      }
+    );
+    setCellarList(response.data);
+    console.log(cellarList);
+  };
+
+  useEffect(() => {
+    loadCellar();
+  }, []);
+
   return (
     <VStack px={"16px"} py={"5px"} justifyContent="center">
       <Box width={"358px"} mt={3} px={3} py={3} rounded={"md"} bg={"#2C4934"}>
@@ -52,23 +60,19 @@ export default function Cellar() {
       <Box w="100%" as="b" fontSize="xl" color={"#FAF4E1"}>
         <h1>모아보기</h1>
       </Box>
+
       <Grid
         mt={10}
         columnGap={"20px"}
         rowGap={"20px"}
         templateColumns={"repeat(5, 1fr)"}>
-        <CellarThumb />
-        <CellarThumb />
-        <CellarThumb />
-        <CellarThumb />
-        <CellarThumb />
-        <CellarThumb />
-        <CellarThumb />
-        <CellarThumb />
-        <CellarThumb />
-        <CellarThumb />
-        <CellarThumb />
-        <CellarThumb />
+        {cellarList.map((cellar: { wine_id: number; wine_picture: string }) => (
+          <CellarThumb
+            wine_id={cellar.wine_id}
+            wine_picture={cellar.wine_picture}
+            pk={cellar.wine_id}
+          />
+        ))}
       </Grid>
     </VStack>
   );

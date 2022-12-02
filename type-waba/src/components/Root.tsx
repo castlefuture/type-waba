@@ -13,7 +13,7 @@ export default function Root() {
         height={"844px"}>
         <Header />
         <Outlet />
-        <ReactQueryDevtools />
+        {/* <ReactQueryDevtools /> */}
       </Box>
     </Flex>
   );
