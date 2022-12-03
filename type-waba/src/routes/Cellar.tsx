@@ -1,4 +1,11 @@
-import { Box, Grid, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  CircularProgress,
+  CircularProgressLabel,
+  Grid,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -6,17 +13,17 @@ import CellarThumb from "../components/CellarThumb";
 
 export default function Cellar() {
   const [cellarList, setCellarList] = useState([]);
-  const loadCellar = async () => {
-    const response = await axios.post(
-      `http://3.38.2.131:8000/api/v1/wineceller/`,
-      {
-        user_id: 3,
-      }
-    );
-    setCellarList(response.data);
-  };
 
   useEffect(() => {
+    const loadCellar = async () => {
+      const response = await axios.post(
+        `http://3.38.2.131:8000/api/v1/wineceller/`,
+        {
+          user_id: 3,
+        }
+      );
+      setCellarList(response.data);
+    };
     loadCellar();
   }, []);
 
@@ -31,6 +38,9 @@ export default function Cellar() {
             <Text as="b" fontSize="12px" color={"#FAF4E1"}>
               레드와인
             </Text>
+            <CircularProgress value={30} color="orange.400" thickness="12px">
+              <CircularProgressLabel>40%</CircularProgressLabel>
+            </CircularProgress>
             <Text fontSize="12px" color={"#FAF4E1"}>
               30/50
             </Text>
@@ -39,6 +49,14 @@ export default function Cellar() {
             <Text as="b" fontSize="12px" color={"#FAF4E1"}>
               화이트와인
             </Text>
+            <CircularProgress
+              value={30}
+              color="orange.400"
+              thickness="12px"
+              trackColor="gray"
+              size="60px"
+            />
+
             <Text fontSize="12px" color={"#FAF4E1"}>
               12/20
             </Text>

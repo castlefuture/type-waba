@@ -6,11 +6,7 @@ import Header from "./Header";
 export default function Root() {
   return (
     <Flex justifyContent="center">
-      <Box
-        alignItems={"center"}
-        bg={"#333333"}
-        width={"390px"}
-        height={"844px"}>
+      <Box alignItems={"center"} bg={"#333333"} width={"390px"} minH={"844px"}>
         <Header />
         <Outlet />
         {/* <ReactQueryDevtools /> */}
