@@ -13,17 +13,17 @@ import CellarThumb from "../components/CellarThumb";
 
 export default function Cellar() {
   const [cellarList, setCellarList] = useState([]);
+  const loadCellar = async () => {
+    const response = await axios.post(
+      `http://3.38.2.131:8000/api/v1/wineceller/`,
+      {
+        user_id: 3,
+      }
+    );
+    setCellarList(response.data);
+  };
 
   useEffect(() => {
-    const loadCellar = async () => {
-      const response = await axios.post(
-        `http://3.38.2.131:8000/api/v1/wineceller/`,
-        {
-          user_id: 3,
-        }
-      );
-      setCellarList(response.data);
-    };
     loadCellar();
   }, []);
 
