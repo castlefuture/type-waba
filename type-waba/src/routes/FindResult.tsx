@@ -9,11 +9,41 @@ import FindListBox from "../components/FindListBox";
 import FindListBoxCellar from "../components/FindListBoxCellar";
 import { IWine } from "../types";
 
+// 추천 api를 가져와야함
+
 export default function FindResult() {
   const { winePk } = useParams();
   const { isLoading, data } = useQuery<IWine>([`wines`, winePk], postDetail);
 
   const wine_id = data?.wine_detail.wine_id;
+
+  const [similarCellar, setSimilarCellar] = useState([]);
+  const [similarSearch, setSimilarSearch] = useState([]);
+
+  const loadSimilarCellar = async () => {
+    const response = await axios.post(
+      `http://3.38.2.131:8000/api/v1/winerecommend/similar_celler`,
+      {
+        user_id: 3,
+      }
+    );
+    setSimilarCellar(response.data);
+  };
+
+  const loadSimilarSearch = async () => {
+    const response = await axios.post(
+      `http://3.38.2.131:8000/api/v1/winerecommend/similar_all`,
+      {
+        user_id: 3,
+      }
+    );
+    setSimilarSearch(response.data);
+  };
+
+  useEffect(() => {
+    loadSimilarCellar();
+    loadSimilarSearch();
+  }, []);
 
   return (
     <VStack px={"16px"} py={"30px"} justifyContent="center">
@@ -22,18 +52,49 @@ export default function FindResult() {
       </Box>
       <Box mb={"40px"}>
         <Box mb={"20px"}>
-          <Text as="b" fontSize="14px" color={"#F8F8F8"}>
-            몬테스, 앤젤스 시크릿 카르메네르
+          <Text fontSize="14px" color={"#F8F8F8"}>
+            <Text as="b">{data?.wine_detail.kname}</Text> 와
           </Text>
           <Text fontSize="14px" color={"#F8F8F8"}>
             유사한 와인입니다.
           </Text>
         </Box>
-        <FindListBoxCellar />
-        <FindListBoxCellar />
-        <FindListBox />
-        <FindListBox />
-        <FindListBox />
+
+        {similarCellar.map(
+          (cellar: {
+            wine_id: number;
+            wine_picture: string;
+            winetype: string;
+            kname: string;
+            winery: string;
+          }) => (
+            <FindListBoxCellar
+              wine_id={cellar.wine_id}
+              wine_picture={cellar.wine_picture}
+              winetype={cellar.winetype}
+              kname={cellar.kname}
+              winery={cellar.winery}
+            />
+          )
+        )}
+
+        {similarSearch.map(
+          (search: {
+            wine_id: number;
+            wine_picture: string;
+            winetype: string;
+            kname: string;
+            winery: string;
+          }) => (
+            <FindListBox
+              wine_id={search.wine_id}
+              wine_picture={search.wine_picture}
+              winetype={search.winetype}
+              kname={search.kname}
+              winery={search.winery}
+            />
+          )
+        )}
       </Box>
     </VStack>
   );

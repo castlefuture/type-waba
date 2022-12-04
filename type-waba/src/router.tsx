@@ -12,6 +12,7 @@ import Test from "./routes/Test";
 import Signup from "./routes/SignupPage";
 import FindResult from "./routes/FindResult";
 import CellarReview from "./routes/CellarReview";
+import RecommandPage from "./routes/RecommandPage";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "finds/:winePk",
         element: <FindResult />,
+      },
+      {
+        path: "recommand",
+        element: <RecommandPage />,
       },
       {
         path: "test",

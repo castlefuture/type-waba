@@ -14,7 +14,7 @@ export default function Find() {
     setInputValue(text);
   };
 
-  /*   const loadRecentSearch = async () => {
+  const loadRecentSearch = async () => {
     const response = await axios.post(
       `http://3.38.2.131:8000/api/v1/winesearch/recentwinesearch`,
       {
@@ -22,7 +22,7 @@ export default function Find() {
       }
     );
     setRecentSearch(response.data);
-  }; */
+  };
 
   const loadRecentCellar = async () => {
     const response = await axios.post(
@@ -34,7 +34,6 @@ export default function Find() {
     setRecentCellar(response.data);
   };
 
-  loadRecentCellar();
   useEffect(() => {
     const loadWines = async () => {
       const response = await axios.get(
@@ -43,6 +42,7 @@ export default function Find() {
       setWineName(response.data);
     };
     loadWines();
+    loadRecentSearch();
     loadRecentCellar();
   }, [inputValue]);
   return (
@@ -81,6 +81,23 @@ export default function Find() {
             최근 검색한 와인
           </Text>
         </Box>
+        {recnetSearch.map(
+          (cellar: {
+            wine_id: number;
+            wine_picture: string;
+            winetype: string;
+            kname: string;
+            ename: string;
+          }) => (
+            <ListBox
+              wine_id={cellar.wine_id}
+              wine_picture={cellar.wine_picture}
+              winetype={cellar.winetype}
+              kname={cellar.kname}
+              ename={cellar.ename}
+            />
+          )
+        )}
       </Box>
 
       <Box>

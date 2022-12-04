@@ -66,3 +66,19 @@ export interface IRecentCellar {
   kname: string;
   ename: string;
 }
+
+export interface ISimilarCeller {
+  wine_id: number;
+  wine_picture: string;
+  winetype: string;
+  kname: string;
+  winery: string;
+}
+
+export interface ISimilarSearch {
+  wine_id: number;
+  wine_picture: string;
+  winetype: string;
+  kname: string;
+  winery: string;
+}
