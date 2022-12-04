@@ -7,21 +7,43 @@ import ListBox from "../components/ListBox";
 export default function Find() {
   const [inputValue, setInputValue] = useState("");
   const [wineName, setWineName] = useState([]);
+  const [recnetSearch, setRecentSearch] = useState([]);
+  const [recentCellar, setRecentCellar] = useState([]);
 
   const onChangeHandler = (text: string) => {
     setInputValue(text);
   };
 
+  /*   const loadRecentSearch = async () => {
+    const response = await axios.post(
+      `http://3.38.2.131:8000/api/v1/winesearch/recentwinesearch`,
+      {
+        user_id: 3,
+      }
+    );
+    setRecentSearch(response.data);
+  }; */
+
+  const loadRecentCellar = async () => {
+    const response = await axios.post(
+      `http://3.38.2.131:8000/api/v1/wineceller/recentWines`,
+      {
+        user_id: 3,
+      }
+    );
+    setRecentCellar(response.data);
+  };
+
+  loadRecentCellar();
   useEffect(() => {
-    console.log(inputValue);
     const loadWines = async () => {
       const response = await axios.get(
         `http://3.38.2.131:8000/api/v1/winesearch/?search=${inputValue}`
       );
       setWineName(response.data);
-      console.log(wineName);
     };
     loadWines();
+    loadRecentCellar();
   }, [inputValue]);
   return (
     <Box px={"16px"} py={"30px"} justifyContent="center">
@@ -59,8 +81,6 @@ export default function Find() {
             최근 검색한 와인
           </Text>
         </Box>
-        <ListBox />
-        <ListBox />
       </Box>
 
       <Box>
@@ -69,8 +89,23 @@ export default function Find() {
             최근 수집한 와인
           </Text>
         </Box>
-        <ListBox />
-        <ListBox />
+        {recentCellar.map(
+          (cellar: {
+            wine_id: number;
+            wine_picture: string;
+            winetype: string;
+            kname: string;
+            ename: string;
+          }) => (
+            <ListBox
+              wine_id={cellar.wine_id}
+              wine_picture={cellar.wine_picture}
+              winetype={cellar.winetype}
+              kname={cellar.kname}
+              ename={cellar.ename}
+            />
+          )
+        )}
       </Box>
     </Box>
   );

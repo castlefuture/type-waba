@@ -58,3 +58,11 @@ export interface IReview {
   wine_review: IReivewReview;
   wine: IReivewWine;
 }
+
+export interface IRecentCellar {
+  wine_id: number;
+  wine_picture: string;
+  winetype: string;
+  kname: string;
+  ename: string;
+}

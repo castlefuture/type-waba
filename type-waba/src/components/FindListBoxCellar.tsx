@@ -5,7 +5,7 @@ export default function FindListBoxCellar() {
   return (
     <Link to={`/wines/11`}>
       <Box mb={3} bg={"#D1654E"} w={"100%"} height={"106px"} rounded="8px">
-        <Grid templateColumns={"1fr 5fr"}>
+        <Grid w={"100%"} templateColumns={"1fr 5fr"}>
           <HStack
             width={"60px"}
             height={"106px"}
@@ -26,10 +26,11 @@ export default function FindListBoxCellar() {
               <Text fontSize="10px" color={"#FAF4E1"}>
                 몬테스
               </Text>
-              <Text mt={"10px"} fontSize="12px" color={"#FAF4E1"}>
-                레드와인
-              </Text>
-              <Box width={"100%"} justifyItems={"flex-end"}>
+
+              <HStack w={"100%"}>
+                <Text mt={"10px"} fontSize="12px" color={"#FAF4E1"}>
+                  레드와인
+                </Text>
                 <Button
                   width={"78px"}
                   height={"29px"}
@@ -37,9 +38,9 @@ export default function FindListBoxCellar() {
                   bg={"#333333"}
                   color={"#FAF4E1"}
                   rounded={"4px"}>
-                  in cellar
+                  review
                 </Button>
-              </Box>
+              </HStack>
             </Box>
           </HStack>
         </Grid>

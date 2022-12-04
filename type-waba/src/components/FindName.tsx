@@ -1,15 +1,10 @@
 import { Box, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { IWineProps } from "../types";
 
-interface IRoomProps {
-  wine_id: number;
-  kname: string;
-  pk: number;
-}
-
-export default function FindName({ pk, wine_id, kname }: IRoomProps) {
+export default function FindName({ pk, wine_id, kname }: IWineProps) {
   return (
-    <Link to={`/wines/${pk}`}>
+    <Link to={`/finds/${pk}`}>
       <Box
         px={"16px"}
         width={"246px"}
