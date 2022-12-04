@@ -9,8 +9,6 @@ import FindListBox from "../components/FindListBox";
 import FindListBoxCellar from "../components/FindListBoxCellar";
 import { IWine } from "../types";
 
-// 추천 api를 가져와야함
-
 export default function FindResult() {
   const { winePk } = useParams();
   const { isLoading, data } = useQuery<IWine>([`wines`, winePk], postDetail);

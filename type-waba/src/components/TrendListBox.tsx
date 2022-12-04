@@ -1,16 +1,16 @@
 import { Box, Grid, HStack, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { IRecentCellar } from "../types";
+import { ITrend } from "../types";
 
-export default function ListBox({
+export default function TrendListBox({
   wine_id,
   wine_picture,
   winetype,
   kname,
   ename,
-}: IRecentCellar) {
+}: ITrend) {
   return (
-    <Link to={`/finds/${wine_id}`}>
+    <Link to={`/finds/11`}>
       <Box mb={3} bg={"#2C4934"} w={"100%"} height={"106px"} rounded="8px">
         <Grid templateColumns={"1fr 5fr"}>
           <HStack

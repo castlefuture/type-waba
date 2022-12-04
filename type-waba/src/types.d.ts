@@ -82,3 +82,11 @@ export interface ISimilarSearch {
   kname: string;
   winery: string;
 }
+
+export interface ITrend {
+  wine_id: number;
+  wine_picture: string;
+  winetype: string;
+  kname: string;
+  ename: string;
+}
