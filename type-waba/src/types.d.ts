@@ -52,6 +52,7 @@ export interface IReivewReview {
   wine_id: number;
   assessment: string;
   hashtag: [];
+  date: string;
 }
 
 export interface IReview {
@@ -89,4 +90,36 @@ export interface ITrend {
   winetype: string;
   kname: string;
   ename: string;
+}
+
+export interface IRecommand {
+  wine_id: number;
+  wine_picture: string;
+  winetype: string;
+  kname: string;
+  winery: string;
+}
+
+export interface IRecommandTagList {
+  [wine: number]: IRecommand;
+}
+
+export interface IRecommandTagWine {
+  wine_list: IRecommandTagList;
+}
+
+export interface IRecommandTag {
+  script: string;
+  wine_list: Array;
+}
+
+export interface IRecommandFood {
+  foodscript1?: string;
+  foodscript2?: string;
+  foodscript3?: string;
+  foodscript4?: string;
+  wine_list1?: Array;
+  wine_list2?: Array;
+  wine_list3?: Array;
+  wine_list4?: Array;
 }

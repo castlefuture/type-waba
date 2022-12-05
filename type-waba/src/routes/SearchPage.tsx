@@ -24,8 +24,8 @@ export default function SearchPage() {
   }, [inputValue]);
   return (
     <Box px={"16px"} py={"30px"} justifyContent="center">
-      <Box w="100%" as="b" fontSize="xl" color={"#FAF4E1"}>
-        <h1>와인 검색</h1>
+      <Box mb={"20px"} w="100%" as="b" fontSize={"24px"} color={"#F8F8F8"}>
+        와인 검색
       </Box>
       <VStack mt={"240px"} spacing={"0"}>
         <Input

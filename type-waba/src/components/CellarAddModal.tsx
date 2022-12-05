@@ -53,7 +53,7 @@ export default function CellarAddModal({
     axios
       .post(`http://3.38.2.131:8000/api/v1/winesearch/${wine_id}/addWine`, {
         // wine_id: wine_id,
-        user_id: 23,
+        user_id: 3,
         assessment: assessment,
         date: date,
         hashtag: hashtag,
@@ -156,10 +156,10 @@ export default function CellarAddModal({
               </Box>
             </Box>
           </VStack>
-          <Alert status="success">
+          {/*   <Alert status="success">
             <AlertIcon />
             셀러에 추가되었습니다.
-          </Alert>
+          </Alert> */}
         </ModalBody>
         <ModalFooter bg={"#333333"}>
           <Button

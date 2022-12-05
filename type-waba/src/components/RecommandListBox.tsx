@@ -1,17 +1,18 @@
 import { Box, Grid, HStack, Image, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { IRecentCellar } from "../types";
+import { IRecommand, IRecommandTagList, IRecommandTagWine } from "../types";
 
 // 와이너리 정보 받아야함
-export default function ListBox({
+export default function RecommandListBox({
   wine_id,
   wine_picture,
   winetype,
   kname,
-  ename,
-}: IRecentCellar) {
+  winery,
+}: IRecommand) {
   return (
-    <Link to={`/finds/${wine_id}`}>
+    <Link to={`/wines/${wine_id}`}>
       <Box mb={3} bg={"#2C4934"} w={"100%"} height={"106px"} rounded="8px">
         <Grid templateColumns={"1fr 5fr"}>
           <HStack
@@ -29,7 +30,7 @@ export default function ListBox({
                 {kname}
               </Text>
               <Text fontSize="10px" color={"#FAF4E1"}>
-                몬테스
+                {winery}
               </Text>
               <Text mt={"10px"} fontSize="12px" color={"#FAF4E1"}>
                 {winetype}

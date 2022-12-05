@@ -10,7 +10,7 @@ export default function TrendListBox({
   ename,
 }: ITrend) {
   return (
-    <Link to={`/finds/11`}>
+    <Link to={`/wines/${wine_id}`}>
       <Box mb={3} bg={"#2C4934"} w={"100%"} height={"106px"} rounded="8px">
         <Grid templateColumns={"1fr 5fr"}>
           <HStack

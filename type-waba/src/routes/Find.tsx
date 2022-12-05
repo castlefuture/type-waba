@@ -48,7 +48,7 @@ export default function Find() {
   return (
     <Box px={"16px"} py={"30px"} justifyContent="center">
       <Box mb={"20px"} w="100%" as="b" fontSize={"24px"} color={"#F8F8F8"}>
-        유사 와인 추천
+        유사 와인 찾기
       </Box>
       <VStack mt={"40px"} mb={"40px"} spacing={"0"}>
         <Input

@@ -8,6 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { postReview } from "../api";
 import { IReview } from "../types";
@@ -18,26 +19,27 @@ export default function CellarReview() {
     [`reviews`, reviewPk],
     postReview
   );
-  console.log(data?.wine.ename);
-  console.log(data?.wine_review.assessment);
   return (
     <Box py={"30px"} bg={"#FAF4E1"}>
       <VStack>
         <Box>
           <Grid gap={"15px"} templateColumns={"131px 181px"}>
-            <HStack
-              width={"131px"}
-              height={"291px"}
-              bg={"#ffffff"}
-              position="relative"
-              overflow={"hidden"}
-              rounded={"8px"}>
-              <Image width={"100%"} src={data?.wine.wine_picture} />
-            </HStack>
+            <Link to={`/wines/${data?.wine.wine_id}`}>
+              {" "}
+              <HStack
+                width={"131px"}
+                height={"291px"}
+                bg={"#ffffff"}
+                position="relative"
+                overflow={"hidden"}
+                rounded={"8px"}>
+                <Image width={"100%"} src={data?.wine.wine_picture} />
+              </HStack>
+            </Link>
             <VStack justify={"center"} alignItems="flex-start">
               <Box>
                 <Text fontWeight={"bold"} fontSize={"14px"} color={"#333333"}>
-                  2022년 12월 11일
+                  {data?.wine_review.date}
                 </Text>
               </Box>
               <Box>
