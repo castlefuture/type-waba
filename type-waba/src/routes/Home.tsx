@@ -38,7 +38,7 @@ export default function Home() {
         <HomeButton link="search" name="와인 검색" />
         <HomeButton link="find" name="유사 와인 찾기" />
         <HomeButton link="cellar" name="와인 셀러" />
-        <HomeButton link="recommand" name="와인 추천" />
+        <HomeButton link="recommend" name="와인 추천" />
       </Grid>
 
       <Box mb={"10px"} w="100%" as="b" fontSize={"24px"} color={"#F8F8F8"}>

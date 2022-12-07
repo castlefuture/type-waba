@@ -38,8 +38,8 @@ export default function Cellar() {
             <Text as="b" fontSize="12px" color={"#FAF4E1"}>
               레드와인
             </Text>
-            <CircularProgress value={30} color="orange.400" thickness="12px">
-              <CircularProgressLabel>40%</CircularProgressLabel>
+            <CircularProgress value={60} color="orange.400" thickness="12px">
+              <CircularProgressLabel>60%</CircularProgressLabel>
             </CircularProgress>
             <Text fontSize="12px" color={"#FAF4E1"}>
               30/50
@@ -49,24 +49,22 @@ export default function Cellar() {
             <Text as="b" fontSize="12px" color={"#FAF4E1"}>
               화이트와인
             </Text>
-            <CircularProgress
-              value={30}
-              color="orange.400"
-              thickness="12px"
-              trackColor="gray"
-              size="60px"
-            />
-
+            <CircularProgress value={24} color="orange.400" thickness="12px">
+              <CircularProgressLabel>24%</CircularProgressLabel>
+            </CircularProgress>
             <Text fontSize="12px" color={"#FAF4E1"}>
-              12/20
+              12/50
             </Text>
           </Box>
           <Box bg={"#313A34"} rounded="md" px={3} py={3} textAlign="center">
             <Text as="b" fontSize="12px" color={"#FAF4E1"}>
               기타
             </Text>
+            <CircularProgress value={16} color="orange.400" thickness="12px">
+              <CircularProgressLabel>16%</CircularProgressLabel>
+            </CircularProgress>
             <Text fontSize="12px" color={"#FAF4E1"}>
-              3/10
+              8/50
             </Text>
           </Box>
         </Grid>

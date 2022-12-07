@@ -13,6 +13,7 @@ import Signup from "./routes/SignupPage";
 import FindResult from "./routes/FindResult";
 import CellarReview from "./routes/CellarReview";
 import RecommandPage from "./routes/RecommandPage";
+import Recommend from "./routes/Recommend";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "recommand",
         element: <RecommandPage />,
+      },
+      {
+        path: "recommend",
+        element: <Recommend />,
       },
       {
         path: "test",
